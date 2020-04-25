@@ -19,13 +19,13 @@ LDFLAGS = -lcurl
 all: ofxget ofxhome ofxhome_test
 
 ofxget: $(OBJS) ofxget_main.o
-	g++ -std=c++11 $(LDFLAGS) -o $@ $^
+	g++ -std=c++11 -o $@ $^ $(LDFLAGS)
 
 ofxhome: $(OBJS) ofxhome_main.o
-	g++ -std=c++11 $(LDFLAGS) -o $@ $^
+	g++ -std=c++11 -o $@ $^ $(LDFLAGS)
 
 ofxhome_test: $(OBJS) ofxhome_test.o
-	g++ -std=c++11 $(LDFLAGS) -o $@ $^
+	g++ -std=c++11 -o $@ $^ $(LDFLAGS)
 
 clean:
 	rm -f $(OBJS)

@@ -25,6 +25,7 @@ static size_t CurlWriteToString(char *ptr, size_t size, size_t nmemb, void *user
 }
 
 string OfxHomeFullDumpString() {
+    // Fake debugging response
     if (false) {
         return R"RESPONSE(<?xml version="1.0" encoding="utf-8"?>
                 <institution id="421">

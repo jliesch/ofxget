@@ -270,7 +270,7 @@ OfxGetContext& OfxGetContext::PostRequest() {
   }
 
   CURL *curl = curl_easy_init();
-  if (! curl) {
+  if (!curl) {
     error_string_ = "Could not initialize curl";
     return *this;
   }

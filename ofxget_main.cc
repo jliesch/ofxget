@@ -9,9 +9,12 @@
 
 #include "ofxget.h"
 
+using ofxget::GetMissingRequestVars;
 using ofxget::OfxGetContext;
+using std::cin;
 using std::cout;
 using std::endl;
+using std::flush;
 using std::map;
 using std::ostream;
 using std::string;
@@ -25,12 +28,25 @@ int main(int argc, char** argv) {
   cmd.parse(argc, argv);
 
   OfxGetContext ofxget;
+  string request_template = ofxget.GetRequestTemplate("requests/" + string(request_filename));
   ofxget.AddApp("QuickBooks_2008").AddInstitution(institution)
-      .AddRequestTemplate(ofxget.GetRequestTemplate("requests/" + string(request_filename)));
+      .AddRequestTemplate(request_template);
   if (passwords_filename.isFound()) {
     ofxget.AddPasswordsForTest(institution, passwords_filename);
   } else {
     ofxget.AddPasswordsForTest(institution, "passwords.txt");
+  }
+
+  vector<string> missing_vars = GetMissingRequestVars(request_template,
+                                                      ofxget.vars_map_);
+  if (!missing_vars.empty()) {
+    cout << "Enter missing account info:" << endl;
+  }
+  for (const string& missing_var : missing_vars) {
+    cout << missing_var << ": " << flush;
+    string value;
+    cin >> value;
+    ofxget.vars_map_[missing_var] = value;
   }
 
   ofxget.PostRequest();

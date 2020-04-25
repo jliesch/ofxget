@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <list>
+#include <string.h>
 
 using std::cout;
 using std::endl;
