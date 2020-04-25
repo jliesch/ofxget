@@ -8,12 +8,13 @@ CPP_SRCS = $(wildcard pugixml/*.cpp)
 
 OBJS = $(CC_SRCS:.cc=.o) $(CPP_SRCS:.cpp=.o)
 INCLUDES=-I/usr/include -Iclap/include
+CLFAGS = -Wall
 LDFLAGS = -lcurl
 
 %.o: %.cc
-	g++ -std=c++11 -g -c -o $@ $< $(INCLUDES)
+	g++ -std=c++11 -g -c -o $@ $< $(INCLUDES) $(CFLAGS)
 %.o: %.cpp
-	g++ -std=c++11 -g -c -o $@ $< $(INCLUDES)
+	g++ -std=c++11 -g -c -o $@ $< $(INCLUDES) $(CFLAGS)
 
 all: ofxget ofxhome ofxhome_test
 

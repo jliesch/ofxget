@@ -58,7 +58,6 @@ void CmdLine::usage()
       arg = *it;
       if (!arg->isHidden())
 	{
-	  int f = cout.flags(ios::right);
 	  cout << setw(_maxLength + 5);
 	  if (!arg->isValOpt())	  
 	    cout << arg->getValueName();
@@ -66,7 +65,7 @@ void CmdLine::usage()
 	    cout << arg->getKeyword(); // usualy boolean keyword
 	  cout.flags(ios::left);
 	  cout << " - " << arg->getDescription() << endl;
-	  cout.flags(f);
+	  cout.flags(ios::right);
 	}
     }
   cout << endl;
