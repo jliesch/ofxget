@@ -9,6 +9,8 @@ using std::map;
 using std::string;
 using std::vector;
 
+namespace ofxget {
+
 struct Institution {
     int ofxhome_id;
     string name;
@@ -40,7 +42,12 @@ const Institution* FindInstitutionByName(
 // server side, however, to be safe AnonymizeRequest is called beforehand.
 string UploadSuccessfulRequest(const string& api_key, const string& url, const string& request);
 
+// Returns true if the api_key is avalid.
+bool ValidateApiKey(const std::string& api_key);
+
 // Remove any personal information from USERID, ACCTID, and USERPASS fields.
 string AnonymizeRequest(const string& request);
+
+}  // namespace ofxget
 
 #endif // OFXHOME_H

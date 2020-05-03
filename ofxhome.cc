@@ -6,9 +6,13 @@
 
 #include "ofxhome.h"
 
+using ofxget::Institution;
 using std::cout;
 using std::endl;
 using std::regex_constants::icase;
+using std::string;
+
+namespace ofxget {
 
 static size_t CurlWriteToString(char *ptr, size_t size, size_t nmemb, void *userdata) {
   if (size != 1) {
@@ -199,3 +203,35 @@ string UploadSuccessfulRequest(const string& api_key, const string& url, const s
     return response;
 }
 
+// Returns true if the api_key is avalid.
+bool ValidateApiKey(const string& api_key) {
+    CURL *curl = curl_easy_init();
+    if (! curl) {
+      throw string("Could not initialize curl");
+    }
+
+    char *api_key_output = curl_easy_escape(curl, api_key.c_str(), api_key.size());
+    string output = string("api_key=") + api_key_output;
+    string response;
+#ifdef OFXHOME_DEBUG
+    curl_easy_setopt(curl, CURLOPT_URL, "http://localhost/ofxhome/index.php/api/checkApiKey");
+#else
+    curl_easy_setopt(curl, CURLOPT_URL, "http://www.ofxhome.com/beta/index.php/api/checkApiKey");
+#endif
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, CurlWriteToString);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&response);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE_LARGE, (long) output.size());
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, output.c_str());
+
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        throw "Curl error: " + std::to_string(res);
+    }
+
+    curl_free(api_key_output);
+    curl_easy_cleanup(curl);
+
+    return response == "success";
+}
+
+} // namespace ofxget

@@ -1,6 +1,11 @@
 #ifndef __OFX_GET_H__
 #define __OFX_GET_H__
 
+#include <map>
+#include <string>
+
+#include "ofxhome.h"
+
 namespace ofxget {
 
 // ofxget is a small library for building OFX requests and downloading OFX
@@ -25,10 +30,8 @@ namespace ofxget {
 //     cout << msg << endl;
 //   }
 
-#include <map>
-#include <string>
-
-#include "ofxhome.h"
+// Request timeout when posting requests in seconds.
+#define REQUEST_TIMEOUT 10
 
 // VarsMap is one half of the data used for building a request. The other is the
 // request template. VarsMap contains all of the variables that will be
@@ -38,6 +41,9 @@ typedef map<string, string> VarsMap;
 class OfxGetContext {
  public:
   OfxGetContext();
+
+  // Return to its original state.
+  void Reset();
 
   // Add application vars. Using "Quicken_2011" is a safe bet. See ofxget_apps.h
   // for a comprehensive list of app names.

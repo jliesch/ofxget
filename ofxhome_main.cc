@@ -2,6 +2,9 @@
 
 #include "ofxhome.h"
 
+using ofxget::Institution;
+using ofxget::OfxHomeFullDumpString;
+using ofxget::OfxDumpStringToInstitutions;
 using std::cout;
 using std::endl;
 

@@ -2,6 +2,8 @@
 
 #include "ofxhome.h"
 
+using ofxget::AnonymizeRequest;
+
 void assertEq(const string& actual, const string& expected) {
   if (actual != expected) {
     std::cout << '"' << actual << '"'  << " != " << '"' << expected << '"'

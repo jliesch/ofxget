@@ -26,6 +26,10 @@ static size_t CurlWriteToString(char *ptr, size_t size, size_t nmemb, void *user
 size_t HeaderCallback(char *buffer, size_t size, size_t nitems, void *userdata);
 
 OfxGetContext::OfxGetContext() {
+  Reset();
+}
+
+void OfxGetContext::Reset() {
   InitVars(&vars_map_);
 }
 
@@ -287,6 +291,7 @@ OfxGetContext& OfxGetContext::PostRequest() {
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, CurlWriteToString);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*) this);
   curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, HeaderCallback);
+  curl_easy_setopt(curl, CURLOPT_TIMEOUT, REQUEST_TIMEOUT /* seconds */);
 
   CURLcode res = curl_easy_perform(curl);
 
