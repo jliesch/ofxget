@@ -5,6 +5,7 @@ This is meant to be the simplest and most self contained OFX client possible. It
 
 Example for downloading Vanguard investments from the command line.
 1. Download the repo
+1. Make sure that libcurl is installed. Not needed for MacOS. On ubuntu: apt-get install libcurl4-openssl-dev.
 1. make
 1. Get accounts: ./ofxget -institution 479 -request accounts.txt
    1. Enter missing USERID and USERPASS.
