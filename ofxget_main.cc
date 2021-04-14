@@ -31,6 +31,10 @@ int main(int argc, char** argv) {
   string request_template = ofxget.GetRequestTemplate("requests/" + string(request_filename));
   ofxget.AddApp("QuickBooks_2008").AddInstitution(institution)
       .AddRequestTemplate(request_template);
+  if (ofxget.is_error()) {
+    cout << "ERROR " << ofxget.error_string() << endl;
+    return 1;
+  }
   if (passwords_filename.isFound()) {
     ofxget.AddPasswordsForTest(institution, passwords_filename);
   } else {
@@ -51,7 +55,7 @@ int main(int argc, char** argv) {
 
   ofxget.PostRequest();
   if (ofxget.is_error()) {
-    cout << "ERROR" << ofxget.error_string() << endl;
+    cout << "ERROR " << ofxget.error_string() << endl;
   } else {
     cout << "REQUEST" << endl << ofxget.request() << endl;
     cout << "RESPONSE" << endl << endl << ofxget.response() << endl;

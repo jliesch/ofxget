@@ -82,10 +82,12 @@ OfxGetContext& OfxGetContext::AddPasswordsForTest(
   pugi::xml_document doc;
   pugi::xml_parse_result result = doc.load_file(filename);
   if (!result) {
+    cout << "Error loading file: " << filename << endl;
     return *this;
   }
   auto inst = doc.find_child_by_attribute("institution", "id", id_str.c_str());
   if (inst.empty()) {
+    cout << "Could not find institution " << id << " in file " << filename << endl;
     return *this;
   }
   for (auto node : inst) {
