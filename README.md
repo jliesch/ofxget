@@ -14,4 +14,4 @@ Example for downloading Vanguard investments from the command line.
 1. Optionally, enter account info in passwords.txt file.
 1. Optionally, refresh institutions.txt: ./ofxhome > institutions.txt
 
-The ofxget tool makes no effort to hide or secure your password and account information. It is meant to be used embedded another program that provides thoes protections.
+The ofxget tool makes no effort to hide or secure your password and account information. It is meant to be used embedded another program that provides those protections.
