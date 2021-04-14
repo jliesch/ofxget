@@ -1,0 +1,8 @@
+.git*
+*.o
+ofxget
+ofxhome
+ofxhome_test
+passwords.txt
+.dockerignore
+Dockerfile
