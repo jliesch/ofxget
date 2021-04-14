@@ -1,0 +1,5 @@
+*.o
+ofxget
+ofxhome
+ofxhome_test
+passwords.txt
